@@ -47,9 +47,10 @@ struct Node {
 *
 *	上次任务：
 *		项目启动，前期草稿，明确任务
+*		创建、遍历、插入、删除
 *
 *	本次任务：
-*		创建、遍历、插入、删除、排序
+*		项目代码简化、注释、遍历、排序
 *
 ***************************************************/
 class DoubleListTable {
@@ -57,6 +58,7 @@ public:
 	DoubleListTable();
 	DoubleListTable(int num);
 	DoubleListTable(int n, int num);
+	DoubleListTable(int* Begin, int* End);
 	DoubleListTable(const DoubleListTable& other);
 	~DoubleListTable();
 
@@ -64,6 +66,17 @@ public:
 	DoubleListTable operator=(const DoubleListTable& other);
 
 	void PrintTable();  // 打印函数
+
+	void AddHeadNum(int num);  // 头插入
+	void AddEndNum(int num);  // 尾插入
+	void AddIndexNum(int index, int num);  // 按照指定位置插入
+
+	void DeleteHeadNum();  // 头删除
+	void DeleteEndNum();  // 尾删除
+	void DeleteIndexNum(int index);  // 按照指定位置删除
+	void DeleteNum(int num, bool flag = false);     // 删除含有 num 数据的第一个节点
+
+	void Sort();           // 排序
 
 private:
 	Node* m_pHead;
