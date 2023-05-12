@@ -3,7 +3,7 @@
 
 /***************************************************
 *
-*	类    名：DoebleListTable
+*	类    名：DoubleListTable
 *
 *	功    能：int 类型双向链表  （ 详细见下方草稿 ）
 *
@@ -37,11 +37,11 @@ struct Node {
 /***************************************************
 *	说明：使用空的头节点，里面的数据域用来保存链表的长度
 *
-*	草    稿    [ DoebleListTable ]
+*	草    稿    [ DoubleListTable ]
 *
 *	类的功能：自己写的链表数组
 *
-*	描    述：使用空的头节点，里面的头结点的数据域用来保存链表的长度
+*	描    述：使用空的头节点，非空为节点，里面的头结点的数据域用来保存链表的长度
 *			  头结点的下一个节点表示第一个节点
 *			  一个节点能够指向上一个节点和下一个节点
 *
@@ -52,13 +52,23 @@ struct Node {
 *		创建、遍历、插入、删除、排序
 *
 ***************************************************/
-class DoebleListTable {
+class DoubleListTable {
 public:
-	DoebleListTable();
-	~DoebleListTable();
+	DoubleListTable();
+	DoubleListTable(int num);
+	DoubleListTable(int n, int num);
+	DoubleListTable(const DoubleListTable& other);
+	~DoubleListTable();
+
+	DoubleListTable operator+(const DoubleListTable& other);
+	DoubleListTable operator=(const DoubleListTable& other);
+
+	void PrintTable();  // 打印函数
 
 private:
-
+	Node* m_pHead;
+	Node* m_pEnd;
+	int m_Len;
 };
 
 #endif // !_DOUBLELISTTABLE_H_
