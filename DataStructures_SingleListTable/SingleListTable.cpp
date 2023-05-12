@@ -190,6 +190,53 @@ SingleListTable::~SingleListTable() {
 	* 好像找不到前面的节点，这里考虑的是使用双向链表。
 	*/
 }
+// 加法运算符重载
+SingleListTable SingleListTable::operator+(const SingleListTable& other) {
+	Node* pHead = this->m_pHead;
+	// 指针后移
+	while (pHead->NextNode != nullptr) {
+		pHead = pHead->NextNode;
+	}
+	for (Node* pOther = other.m_pHead->NextNode; pOther != nullptr; pOther=pOther->NextNode) {
+		// 获取新链表的数据
+		Node* pNum = new Node;
+		pNum->number = pOther->number;
+		pNum->NextNode = nullptr;
+
+		//挂载新节点到最后节点
+		pHead->NextNode = pNum;
+		pHead = pHead->NextNode;
+	}
+	return *this;
+}
+
+// 等于运算符重载
+SingleListTable SingleListTable::operator=(const SingleListTable& other) {
+	// 初始化
+	this->m_pHead = new Node;
+	this->m_pHead->NextNode = nullptr;
+	this->m_pHead->number = this->m_Len = other.m_Len;
+
+	Node* pTemp = this->m_pHead;   // 临时保存当前链表指针
+	Node* pother = other.m_pHead;  // 临时保存传入的链表指针
+	Node* pNum = nullptr;          // 保存节点指针
+
+	// 从头开始复制
+	while (pother->NextNode != nullptr) {  // 临时保存传入的链表指针不为空
+		// 初始化节点，并手动赋值
+		pNum = new Node;
+		pNum->number = pother->NextNode->number;
+		pNum->NextNode = nullptr;
+
+		pTemp->NextNode = pNum;     // 挂在最后的位置
+
+		// 两个指针一起后移
+		pTemp = pTemp->NextNode;
+		pother = pother->NextNode;
+	}
+	return *this;
+}
+
 
 // 打印链表
 void SingleListTable::PrintList() const {

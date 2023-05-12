@@ -63,6 +63,10 @@ public:
 	SingleListTable(const SingleListTable& other);
 	~SingleListTable();
 
+	// 运算符重载（ + - ）
+	SingleListTable operator+(const SingleListTable& other);  // 加法运算符重载
+	SingleListTable operator=(const SingleListTable& other);  // 等于运算符重载
+
 	void PrintList()const;     // 打印链表
 
 	void AddHeadNum(int num);  // 头插入
