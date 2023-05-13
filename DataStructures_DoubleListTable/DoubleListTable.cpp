@@ -523,6 +523,7 @@ void DoubleListTable::DeleteEndNum() {
 *			更改人员：xyt
 *			更改内容：
 *					1 ：写了注释、增加了链表被删除的位置信息
+* *					2 ：新增链表长度为零的判断
 ***********************************************************************/
 void DoubleListTable::DeleteIndexNum(int index) {
 	if (0 == this->m_Len) {  // 链表为空

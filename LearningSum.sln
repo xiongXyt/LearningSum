@@ -9,8 +9,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mice", "mice\mice.vcxproj",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "test\test.vcxproj", "{49BD6C50-8D8C-4FC0-868A-7BDDD59E8183}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataStructures_LinearTable", "DataStructures_LinearTable\DataStructures_LinearTable.vcxproj", "{F7B7B449-F603-4E9B-A288-2BA499B5A142}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataStructures_SingleListTable", "DataStructures_SingleListTable\DataStructures_SingleListTable.vcxproj", "{57C64CCC-94C5-4AFE-877D-596977A22E74}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataStructures_DoubleListTable", "DataStructures_DoubleListTable\DataStructures_DoubleListTable.vcxproj", "{2CD93D96-FEE5-4E1B-9304-8CED7C2A4D45}"
@@ -47,14 +45,6 @@ Global
 		{49BD6C50-8D8C-4FC0-868A-7BDDD59E8183}.Release|x64.Build.0 = Release|x64
 		{49BD6C50-8D8C-4FC0-868A-7BDDD59E8183}.Release|x86.ActiveCfg = Release|Win32
 		{49BD6C50-8D8C-4FC0-868A-7BDDD59E8183}.Release|x86.Build.0 = Release|Win32
-		{F7B7B449-F603-4E9B-A288-2BA499B5A142}.Debug|x64.ActiveCfg = Debug|x64
-		{F7B7B449-F603-4E9B-A288-2BA499B5A142}.Debug|x64.Build.0 = Debug|x64
-		{F7B7B449-F603-4E9B-A288-2BA499B5A142}.Debug|x86.ActiveCfg = Debug|Win32
-		{F7B7B449-F603-4E9B-A288-2BA499B5A142}.Debug|x86.Build.0 = Debug|Win32
-		{F7B7B449-F603-4E9B-A288-2BA499B5A142}.Release|x64.ActiveCfg = Release|x64
-		{F7B7B449-F603-4E9B-A288-2BA499B5A142}.Release|x64.Build.0 = Release|x64
-		{F7B7B449-F603-4E9B-A288-2BA499B5A142}.Release|x86.ActiveCfg = Release|Win32
-		{F7B7B449-F603-4E9B-A288-2BA499B5A142}.Release|x86.Build.0 = Release|Win32
 		{57C64CCC-94C5-4AFE-877D-596977A22E74}.Debug|x64.ActiveCfg = Debug|x64
 		{57C64CCC-94C5-4AFE-877D-596977A22E74}.Debug|x64.Build.0 = Debug|x64
 		{57C64CCC-94C5-4AFE-877D-596977A22E74}.Debug|x86.ActiveCfg = Debug|Win32
