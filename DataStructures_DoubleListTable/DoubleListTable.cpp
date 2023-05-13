@@ -4,22 +4,17 @@
 * 私有成员
 */
 /***********************************************************************
-*
 * 函 数 名：__InitList()
-*
 * 形 参 表：None
-*
 * 返 回 值：None
-*
 * 函数功能：
 *			-- 1 -- ：初始化链表空头节点，初始化链表尾节点并指向头结点
-*
+*			-- 2 -- ：链表长度为零
 * 最后更改：
 *			更改时间：【 2023.5.12 】
 *			更改人员：xyt
 *			更改内容：
 *					1 ：就是写个注释
-*
 ***********************************************************************/
 void DoubleListTable::__InitList() {
 	// 初始化链表空头节点
@@ -38,48 +33,36 @@ void DoubleListTable::__InitList() {
 * 公有成员
 */
 /***********************************************************************
-*
 * 函 数 名：DoubleListTable()
-*
 * 形 参 表：None
-*
 * 返 回 值：None
-*
 * 函数功能：
 *			-- 1 -- ：无参构造函数。
 *			-- 2 -- ：初始化空头节点，初始化尾节点并指向头结点。
-*
 * 最后更改：
 *			更改时间：【 2023.5.12 】
 *			更改人员：xyt
 *			更改内容：
 *					1 ：就是把里面的内容全部集成到了私有成员函数  __InitList()
-*
 ***********************************************************************/
 DoubleListTable::DoubleListTable() {
 	this->__InitList();  // 初始化链表
 }
 
 /***********************************************************************
-*
 * 函 数 名：DoubleListTable(int num)
-*
 * 形 参 表：
 *			1 ) num -->( int ) : 需要初始化链表的节点个数
-*
 * 返 回 值：None
-*
 * 函数功能：
 *			-- 1 -- ：有参构造
 *			-- 2 -- ：初始化空头节点，初始化尾节点并指向头结点。
 *			-- 3 -- ：构造 1~num 的有序链表
-*
 * 最后更改：
 *			更改时间：【 2023.5.12 】
 *			更改人员：xyt
 *			更改内容：
 *					1 ：就是把里面的头插法集成到了公有成员函数 AddHeadNum(int num)
-*
 ***********************************************************************/
 DoubleListTable::DoubleListTable(int num) {
 	this->__InitList();  // 初始化链表
@@ -90,26 +73,20 @@ DoubleListTable::DoubleListTable(int num) {
 }
 
 /***********************************************************************
-*
 * 函 数 名：DoubleListTable(int n, int num)
-*
 * 形 参 表：
 *			1 ) n ---->( int ) : 需要初始化链表的节点个数
 *			2 ) num -->( int ) : 链表每个节点数据域的值
-*
 * 返 回 值：None
-*
 * 函数功能：
 *			-- 1 -- ：有参构造
 *			-- 2 -- ：初始化空头节点，初始化尾节点并指向头结点。
 *			-- 3 -- ：构造值都为 num 的链表
-*
 * 最后更改：
 *			更改时间：【 2023.5.12 】
 *			更改人员：xyt
 *			更改内容：
 *					1 ：就是把里面的头插法集成到了公有成员函数 AddHeadNum(int num)
-*
 ***********************************************************************/
 DoubleListTable::DoubleListTable(int n, int num) {
 	this->__InitList();  // 初始化链表
@@ -120,26 +97,20 @@ DoubleListTable::DoubleListTable(int n, int num) {
 }
 
 /***********************************************************************
-*
 * 函 数 名：DoubleListTable(int* Begin, int* End)
-*
 * 形 参 表：
 *			1 ) Begin --->( int* ) : 连续内存的第一个地址
 *			2 ) End   --->( int* ) : 连续内存的最后一个地址
-*
 * 返 回 值：None
-*
 * 函数功能：
 *			-- 1 -- ：有参构造
 *			-- 2 -- ：初始化空头节点，初始化尾节点并指向头结点。
 *			-- 3 -- ：构造值为一段连续内存内的值的链表
-*
 * 最后更改：
 *			更改时间：【 2023.5.12 】
 *			更改人员：xyt
 *			更改内容：
 *					1 ：就是把里面的头插法集成到了公有成员函数 AddHeadNum(int num)
-*
 ***********************************************************************/
 DoubleListTable::DoubleListTable(int* Begin, int* End) {
 	this->__InitList();  // 初始化链表
@@ -150,25 +121,19 @@ DoubleListTable::DoubleListTable(int* Begin, int* End) {
 }
 
 /***********************************************************************
-*
 * 函 数 名：DoubleListTable(const DoubleListTable& other)
-*
 * 形 参 表：
 *			1 ) other -->( const DoubleListTable& ) : 另外一个常链表类
-*
 * 返 回 值：None
-*
 * 函数功能：
 *			-- 1 -- ：复制构造函数
 *			-- 2 -- ：初始化空头节点，初始化尾节点并指向头结点。
-*			-- 2 -- ：深复制一个只有值相同的链表
-*
+*			-- 3 -- ：深复制一个只有值相同的链表
 * 最后更改：
 *			更改时间：【 2023.5.12 】
 *			更改人员：xyt
 *			更改内容：
 *					1 ：就是把里面的尾插法集成到了公有成员函数 AddEndNum(int num)
-*
 ***********************************************************************/
 DoubleListTable::DoubleListTable(const DoubleListTable& other) {
 	this->__InitList();  // 初始化链表
@@ -185,24 +150,18 @@ DoubleListTable::DoubleListTable(const DoubleListTable& other) {
 }
 
 /***********************************************************************
-*
 * 函 数 名：~DoubleListTable()
-*
 * 形 参 表：None
-*
 * 返 回 值：None
-*
 * 函数功能：
 *			-- 1 -- ：析构函数
 *			-- 2 -- ：遍历释放
 *			-- 3 -- ：尾节点是单独释放的
-*
 * 最后更改：
 *			更改时间：【 2023.5.12 】
 *			更改人员：xyt
 *			更改内容：
 *					1 ：单独释放了尾节点
-*
 ***********************************************************************/
 DoubleListTable::~DoubleListTable() {
 	Node* pTemp = nullptr;  // 临时保存节点
@@ -224,26 +183,20 @@ DoubleListTable::~DoubleListTable() {
 }
 
 /***********************************************************************
-*
 * 函 数 名：operator+(const DoubleListTable& other)
-*
 * 形 参 表：
 *			1 ) other -->( const DoubleListTable& ) : 另外一个常链表类
-*
 * 返 回 值：
 *			1 ) DoubleListTable : 返回当面的链表
-*
 * 函数功能：
 *			-- 1 -- ：加法重载函数
 *			-- 2 -- ：尾插法
 *			-- 3 -- ：当前链表的最后一节点接一个链表的值
-*
 * 最后更改：
 *			更改时间：【 2023.5.12 】
 *			更改人员：xyt
 *			更改内容：
 *					1 ：就是把里面的尾插法集成到了公有成员函数 AddEndNum(int num)
-*
 ***********************************************************************/
 DoubleListTable DoubleListTable::operator+(const DoubleListTable& other) {
 	Node* pOther = other.m_pHead->NextNode;  // 保存传入链表头节点的下一个节点
@@ -259,26 +212,20 @@ DoubleListTable DoubleListTable::operator+(const DoubleListTable& other) {
 }
 
 /***********************************************************************
-*
 * 函 数 名：operator=(const DoubleListTable& other)
-*
 * 形 参 表：
 *			1 ) other -->( const DoubleListTable& ) : 另外一个常链表类
-*
 * 返 回 值：
 *			1 ) DoubleListTable : 返回当面的链表
-*
 * 函数功能：
 *			-- 1 -- ：等于重载函数
 *			-- 2 -- ：尾插法
 *			-- 3 -- ：当前链表的值为另外一个链表的值，深拷贝
-*
 * 最后更改：
 *			更改时间：【 2023.5.12 】
 *			更改人员：xyt
 *			更改内容：
 *					1 ：就是把里面的尾插法集成到了公有成员函数 AddEndNum(int num)
-*
 ***********************************************************************/
 DoubleListTable DoubleListTable::operator=(const DoubleListTable& other) {
 	this->__InitList();  // 初始化链表
@@ -296,22 +243,16 @@ DoubleListTable DoubleListTable::operator=(const DoubleListTable& other) {
 }
 
 /***********************************************************************
-*
 * 函 数 名：PrintTable()
-*
 * 形 参 表：None
-*
 * 返 回 值：None
-*
 * 函数功能：
 *			-- 1 -- ：从头节点下一个节点打印全部链表的值
-*
 * 最后更改：
 *			更改时间：【 2023.5.12 】
 *			更改人员：xyt
 *			更改内容：
-*					1 ：就是把里面的尾插法集成到了公有成员函数 AddEndNum(int num)
-*
+*					1 ：新增加链表长度的打印
 ***********************************************************************/
 void DoubleListTable::PrintTable() {
 	Node* pPint = this->m_pHead->NextNode;  // 保存链表头节点的下一个节点
@@ -329,23 +270,17 @@ void DoubleListTable::PrintTable() {
 }
 
 /***********************************************************************
-*
 * 函 数 名：AddHeadNum(int num)
-*
 * 形 参 表：
 *			1 ) num -->( int ) : 插入链表的值
-*
 * 返 回 值：None
-*
 * 函数功能：
 *			-- 1 -- ：插入新值到链表的头部
-*
 * 最后更改：
 *			更改时间：【 2023.5.12 】
 *			更改人员：xyt
 *			更改内容：
 *					1 ：就是写了注释
-*
 ***********************************************************************/
 void DoubleListTable::AddHeadNum(int num) {
 	// 初始化新节点
@@ -381,23 +316,17 @@ void DoubleListTable::AddHeadNum(int num) {
 }
 
 /***********************************************************************
-*
 * 函 数 名：AddEndNum(int num)
-*
 * 形 参 表：
 *			1 ) num -->( int ) : 插入链表的值
-*
 * 返 回 值：None
-*
 * 函数功能：
 *			-- 1 -- ：插入新值到链表的尾部
-*
 * 最后更改：
 *			更改时间：【 2023.5.12 】
 *			更改人员：xyt
 *			更改内容：
 *					1 ：就是写了注释
-*
 ***********************************************************************/
 void DoubleListTable::AddEndNum(int num) {
 	// 初始化新节点
@@ -419,24 +348,18 @@ void DoubleListTable::AddEndNum(int num) {
 }
 
 /***********************************************************************
-*
 * 函 数 名：AddIndexNum(int index, int num)
-*
 * 形 参 表：
 *			1 ) index -->( int ) : 插入链表的位置
 *			2 ) num -->( int ) : 插入链表的值
-*
 * 返 回 值：None
-*
 * 函数功能：
 *			-- 1 -- ：插入新值 num 到链表的 index 位置
-*
 * 最后更改：
 *			更改时间：【 2023.5.12 】
 *			更改人员：xyt
 *			更改内容：
 *					1 ：就是写了注释
-*
 ***********************************************************************/
 void DoubleListTable::AddIndexNum(int index, int num) {
 	if (index > 0 && index <= this->m_Len + 1) {  // 索引正确
@@ -473,22 +396,16 @@ void DoubleListTable::AddIndexNum(int index, int num) {
 }
 
 /***********************************************************************
-*
 * 函 数 名：DeleteHeadNum()
-*
 * 形 参 表：None
-*
 * 返 回 值：None
-*
 * 函数功能：
 *			-- 1 -- ：删除链表的一个节点
-*
 * 最后更改：
 *			更改时间：【 2023.5.12 】
 *			更改人员：xyt
 *			更改内容：
 *					1 ：写了注释、增加了链表被删除的位置信息
-*
 ***********************************************************************/
 void DoubleListTable::DeleteHeadNum() {
 	if (this->m_Len == 0) {   // 链表为空
@@ -537,22 +454,16 @@ void DoubleListTable::DeleteHeadNum() {
 }
 
 /***********************************************************************
-*
 * 函 数 名：DeleteEndNum()
-*
 * 形 参 表：None
-*
 * 返 回 值：None
-*
 * 函数功能：
 *			-- 1 -- ：删除链表的最后一个节点
-*
 * 最后更改：
 *			更改时间：【 2023.5.12 】
 *			更改人员：xyt
 *			更改内容：
 *					1 ：写了注释、增加了链表被删除的位置信息
-*
 ***********************************************************************/
 void DoubleListTable::DeleteEndNum() {
 	if (0 == this->m_Len) {  // 链表为空
@@ -601,84 +512,78 @@ void DoubleListTable::DeleteEndNum() {
 }
 
 /***********************************************************************
-*
 * 函 数 名：DeleteIndexNum(int index)
-*
 * 形 参 表：
 *			1 ) : index -->( int ) 删除链表的位置
-*
 * 返 回 值：None
-*
 * 函数功能：
 *			-- 1 -- ：删除链表index位置的节点
-*
 * 最后更改：
 *			更改时间：【 2023.5.12 】
 *			更改人员：xyt
 *			更改内容：
 *					1 ：写了注释、增加了链表被删除的位置信息
-*
 ***********************************************************************/
 void DoubleListTable::DeleteIndexNum(int index) {
-	if (index > 0 && index <= this->m_Len) {  // 索引正确
-		if (1 == index) {  // 第一个节点
-			this->DeleteHeadNum();  // 删除头节点
-		}
-		else if (index == this->m_Len) {  // 最后一个节点
-			this->DeleteEndNum();  // 删除尾节点
-		}
-		else {  // 非头尾节点
-			Node* pIndex = this->m_pHead->NextNode;  // 保存链表第一个节点
-
-			// 遍历至需要删除节点前一个节点
-			for (int i = 1; i < index; i++) {
-				pIndex = pIndex->NextNode;
+	if (0 == this->m_Len) {  // 链表为空
+		cout << "链表为空！" << endl;
+	}
+	else {  // 链表不为空
+		if (index > 0 && index <= this->m_Len) {  // 索引正确
+			if (1 == index) {  // 第一个节点
+				this->DeleteHeadNum();  // 删除头节点
 			}
+			else if (index == this->m_Len) {  // 最后一个节点
+				this->DeleteEndNum();  // 删除尾节点
+			}
+			else {  // 非头尾节点
+				Node* pIndex = this->m_pHead->NextNode;  // 保存链表第一个节点
 
-			// 断开需删除节点
-			Node* pTemp = pIndex->NextNode;
-			pIndex->NextNode = pTemp->NextNode;
-			pTemp->NextNode->FrontNode = pIndex;
+				// 遍历至需要删除节点前一个节点
+				for (int i = 1; i < index; i++) {
+					pIndex = pIndex->NextNode;
+				}
 
-			// 打印被删除的节点信息
-			cout << "删除 : " << pTemp->number << endl;
-			cout << "位置 : " << index << " " << endl;
+				// 断开需删除节点
+				Node* pTemp = pIndex->NextNode;
+				pIndex->NextNode = pTemp->NextNode;
+				pTemp->NextNode->FrontNode = pIndex;
 
-			// 释放被断开的节点
-			delete pTemp;
-			pTemp = nullptr;
+				// 打印被删除的节点信息
+				cout << "删除 : " << pTemp->number << endl;
+				cout << "位置 : " << index << " " << endl;
 
-			// 长度减少一
-			--this->m_Len;
-			this->m_pHead->number = this->m_Len;
-			this->m_pEnd->number = this->m_Len;
+				// 释放被断开的节点
+				delete pTemp;
+				pTemp = nullptr;
+
+				// 长度减少一
+				--this->m_Len;
+				this->m_pHead->number = this->m_Len;
+				this->m_pEnd->number = this->m_Len;
+			}
+		}
+		else {  // 索引有误
+			cout << "插入位置有误！" << endl;
 		}
 	}
-	else {  // 索引有误
-		cout << "插入位置有误！" << endl;
-	}
+
 }
 
 /***********************************************************************
-*
 * 函 数 名：DeleteNum(int num, bool flag)
-*
 * 形 参 表：
 *			1 ) : num --->( int ) 需删除的值
 *			2 ) : flag -->( int ) 全部删除链表num值的标志
-*
 * 返 回 值：None
-*
 * 函数功能：
 *			-- 1 -- ：删除链表 num 值的第一个节点
 *			-- 2 -- ：flag ( true ) 信息全部删除链表 num 值的节点
-*
 * 最后更改：
 *			更改时间：【 2023.5.12 】
 *			更改人员：xyt
 *			更改内容：
 *					1 ：写了注释、增加了链表被删除的位置信息
-*
 ***********************************************************************/
 void DoubleListTable::DeleteNum(int num, bool flag) {  // flag为true,全部删除
 	Node* pTemp = this->m_pHead;  // 保存头节点
@@ -729,22 +634,16 @@ void DoubleListTable::DeleteNum(int num, bool flag) {  // flag为true,全部删除
 }
 
 /***********************************************************************
-*
 * 函 数 名：Sort()
-*
 * 形 参 表：None
-*
 * 返 回 值：None
-*
 * 函数功能：
 *			-- 1 -- ：冒泡排序，递增
-*
 * 最后更改：
 *			更改时间：【 2023.5.12 】
 *			更改人员：xyt
 *			更改内容：
 *					1 ：写了注释
-*
 ***********************************************************************/
 void DoubleListTable::Sort() {
 	for (int i = 1; i < this->m_Len; i++) {  // 趟次
