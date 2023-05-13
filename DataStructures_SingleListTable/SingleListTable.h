@@ -15,6 +15,9 @@
 *		修改时间：【 2023-05-11 下午 】
 *		修改内容：【 完成所有的预定功能 】
 * 
+*		修改时间：【 2023-05-13 】
+*		修改内容：【  】
+* 
 *	作    者：【 xyt 】
 *	联系方式：3124725835@qq.com
 *
@@ -49,12 +52,19 @@ struct Node {
 *	历史任务：
 *		项目启动，类的数据成员定义、构造析构（还没有做测试）
 *		创建、遍历、插入、删除、排序
+*		运算符重载，（ + = ）
 *
 *	本次任务：
-*		运算符重载，（ + - ）
+*		遍历、项目代码简化、注释、做好所有的测试案例、
 *
 ***************************************************/
 class SingleListTable {
+private:
+	Node* m_pHead;  // 头指针
+	int m_Len;      // 节点的长度
+
+	void __InitList();  // 初始化链表
+
 public:
 	SingleListTable();
 	SingleListTable(int n);
@@ -80,9 +90,6 @@ public:
 
 	void Sort();           // 排序
 
-private:
-	Node* m_pHead;  // 头指针
-	int m_Len;      // 节点的长度
 };
 
 #endif // !_SINGLELISTTABLE_H_

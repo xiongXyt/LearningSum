@@ -3,15 +3,74 @@
 using namespace std;
 
 int main() {
-	int n[2] = { 1,1 };
-	int m[2] = { 2,2 };
-	SingleListTable singlelisttable1(n, n + 2);
-	SingleListTable singlelisttable2(m, m + 2);
-	SingleListTable singlelisttable3;
-	singlelisttable1.PrintList();
-	singlelisttable2.PrintList();
-	cout << "*************" << endl;
-	singlelisttable3 = singlelisttable1 + singlelisttable2;
-	singlelisttable3.PrintList();
+	/*
+	* ÎÞ²Î¹¹Ôìº¯Êý²âÊÔ
+	*/
+	//SingleListTable singlelisttable;
+	//singlelisttable.PrintList();
+
+	/*
+	* ÓÐ²Î¹¹Ôìº¯Êý²âÊÔ
+	*/
+	SingleListTable singlelisttable(10);
+	singlelisttable.PrintList();
+
+	/*
+	* Í·²¿²åÈë²âÊÔ
+	*/
+	//SingleListTable singlelisttable(2);
+	//singlelisttable.PrintList();
+	//singlelisttable.AddHeadNum(100);
+	//singlelisttable.PrintList();
+
+	/*
+	* Î²²¿²åÈë²âÊÔ
+	*/
+	//SingleListTable singlelisttable(3);
+	//singlelisttable.PrintList();
+	//singlelisttable.AddEndNum(100);
+	//singlelisttable.PrintList();
+
+	/*
+	* Ë÷Òý²åÈë²âÊÔ
+	*/
+	//SingleListTable singlelisttable(3);
+	//singlelisttable.PrintList();
+	//singlelisttable.AddIndexNum(4,100);
+	//singlelisttable.PrintList();
+
+	/*
+	* Í·É¾³ý²âÊÔ
+	*/
+	//SingleListTable singlelisttable(10);
+	//singlelisttable.PrintList();
+	//singlelisttable.DeleteHeadNum();
+	//singlelisttable.PrintList();
+
+	/*
+	* Î²É¾³ý²âÊÔ
+	*/
+	//SingleListTable singlelisttable(10);
+	//singlelisttable.PrintList();
+	//singlelisttable.DeleteEndNum();
+	//singlelisttable.PrintList();
+
+	/*
+	* É¾³ýÊý¾Ý²âÊÔ
+	*/
+	//int n[5] = { 1,2,1,1,2 };
+	//SingleListTable singlelisttable(n, n + 5);
+	//singlelisttable.PrintList();
+	//singlelisttable.DeleteNum(2, true);
+	//singlelisttable.PrintList();
+
+	/*
+	* Êý¾ÝÅÅÐò²âÊÔ
+	*/
+	//int n[5] = { 1,2,2,1,2 };
+	//SingleListTable singlelisttable(n, n + 5);
+	//singlelisttable.PrintList();
+	//singlelisttable.Sort();
+	//singlelisttable.PrintList();
 	return 0;
 }
