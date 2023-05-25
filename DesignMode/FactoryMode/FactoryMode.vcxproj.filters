@@ -15,8 +15,34 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TestMain.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Factory.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Pig.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Goods.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GoodsA.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GoodsB.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FactoryObject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

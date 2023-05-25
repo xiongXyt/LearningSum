@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{bc17d100-bf4b-4568-8f9a-18138eed9a94}</ProjectGuid>
-    <RootNamespace>LearningSum</RootNamespace>
+    <ProjectGuid>{54be5cd4-0882-4a96-beae-58697e32041e}</ProjectGuid>
+    <RootNamespace>FactoryMode</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,7 +139,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="TestMain.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Factory.h" />
+    <ClInclude Include="FactoryObject.h" />
+    <ClInclude Include="Goods.h" />
+    <ClInclude Include="GoodsA.h" />
+    <ClInclude Include="GoodsB.h" />
+    <ClInclude Include="Monster.h" />
+    <ClInclude Include="Object.h" />
+    <ClInclude Include="Pig.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

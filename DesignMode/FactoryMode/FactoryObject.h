@@ -1,0 +1,4 @@
+#ifndef _FACTORYOBJECT_H_
+#define _FACTORYOBJECT_H_
+
+#endif // !_FACTORYOBJECT_H_
