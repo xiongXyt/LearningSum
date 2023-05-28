@@ -36,4 +36,6 @@ int main() {
 	delete object;
 	object = nullptr;
 	return 0;
+
+
 }
