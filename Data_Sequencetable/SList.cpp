@@ -29,11 +29,12 @@ void SList::AddLen() {
 * 构造一个长度为10的空顺序表
 */
 SList::SList() {
-	this->m_MaxSize = MAXSIZE;
+	this->m_MaxSize = 10;
 	this->m_Usedsize = 0;
 	this->m_Array = new SNUM[m_MaxSize];
+	SNUM flag = this->m_MaxSize;
 	for (SNUM i = 0; i < this->m_MaxSize; ++i) {
-		this->m_Array[i] = i + 1;
+		this->m_Array[i] = flag--;
 		++this->m_Usedsize;
 	}
 }
@@ -52,11 +53,56 @@ SList::SList(SNUM len, SNUM num) {
 }
 
 /*
+* 构造一个连续内存的值为顺序表的值（ 左闭右开 ）
+* 内存开始地址
+* 内存结束地址
+*/
+SList::SList(SNUM* begin, SNUM* end) {
+	this->m_MaxSize = MAXSIZE;
+	this->m_Usedsize = 0;
+	this->m_Array = new SNUM[m_MaxSize];
+
+	SNUM* pbegin = begin;
+	SNUM i = 0;
+	while (pbegin != end) {
+		if (this->IsFull()) {
+			this->AddLen();
+		}
+		this->m_Array[i++] = *pbegin;
+		++pbegin;
+		++this->m_Usedsize;
+	}
+}
+
+/*
+* 拷贝构造函数
+*/
+SList::SList(const SList& other) {
+	this->m_MaxSize = this->m_Usedsize = other.GetUsedsize();
+	this->m_Array = new SNUM[m_MaxSize];
+	memcpy(this->m_Array, other.GetArray(), sizeof(SNUM) * this->m_Usedsize);
+}
+
+/*
 * 顺序释放内存
 */
 SList::~SList() {
 	delete[]this->m_Array;
 	this->m_Array = nullptr;
+}
+
+/*
+* 获得当前顺序表使用的大小
+*/
+SNUM SList::GetUsedsize()const {
+	return this->m_Usedsize;
+}
+
+/*
+* 获得当前顺序表的控制指针
+*/
+SNUM* SList::GetArray()const {
+	return this->m_Array;
 }
 
 /*
@@ -131,7 +177,7 @@ void SList::Remove(SNUM num) {
 		cout << "IsEmpty" << endl;
 	}
 	for (SNUM i = 0; i < m_Usedsize; ++i) {
-		if (this->m_Array[i]==num) {
+		if (this->m_Array[i] == num) {
 			for (SNUM j = i; j < m_Usedsize - 1; ++j) {
 				int temp = 0;
 				temp = this->m_Array[j];
@@ -154,6 +200,60 @@ void SList::RemoveAll(SNUM num) {
 		this->Remove(num);
 	}
 }
+
+/*
+* 链表排序，默认是升序
+* flag : false 降序
+*/
+void SList::Sort(bool flag) {
+	if (this->IsEmpty() || 1 == this->m_Usedsize) {
+		cout << "为空或者元素数量为一" << endl;
+		return;
+	}
+	SNUM temp = 0;
+	for (SNUM i = this->m_Usedsize - 1; i > 0; --i) {
+		for (SNUM j = 0; j < i; ++j) {
+			if (this->m_Array[j] > this->m_Array[j + 1]) {
+				temp = this->m_Array[j];
+				this->m_Array[j] = this->m_Array[j + 1];
+				this->m_Array[j + 1] = temp;
+			}
+		}
+	}
+}
+
+/*
+* 排序之后相同元素保留一个
+* flag : false 降序
+*/
+void SList::SortOne(bool flag) {
+	// 排序
+	this->Sort();
+
+	// 记录当前元素的个数
+	SNUM index = this->m_Usedsize - 1;
+
+	// 当前比较的位置
+	SNUM i = 0;
+	while (i != index) {
+		if (this->m_Array[i] == this->m_Array[i + 1]) {  // 元素相同
+			for (SNUM k = 0; k < index - i - 1; ++k) {  // 元素后移
+				SNUM temp = this->m_Array[k + i + 1];
+				this->m_Array[k + i + 1] = this->m_Array[k + i + 2];
+				this->m_Array[k + i + 2] = temp;
+			}
+			--index;  // 个数减一
+		}
+		else {
+			++i;  // 位置加一
+		}
+	}
+	this->m_Usedsize = index + 1;
+}
+
+/*
+* 归并排序
+*/
 
 /*
 * 打印顺序表

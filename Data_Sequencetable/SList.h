@@ -10,7 +10,7 @@ using namespace std;
 #define ADDSIZE 10
 
 /*
-* 数据成员：最大长度，被使用的长度，内置数组
+* 数据成员：最大长度，被使用的长度，数组控制指针
 */
 
 class SList {
@@ -26,7 +26,12 @@ private:
 public:
 	SList();
 	SList(SNUM len, SNUM num);
+	SList(SNUM* begin, SNUM* end);
+	SList(const SList& other);
 	~SList();
+
+	SNUM GetUsedsize()const;
+	SNUM *GetArray()const;
 
 	bool IsEmpty();
 	void Push_Back(SNUM num);
@@ -34,6 +39,8 @@ public:
 	void Insert(SNUM pos,SNUM num);
 	void Remove(SNUM num);
 	void RemoveAll(SNUM num);
+	void Sort(bool flag = true);
+	void SortOne(bool flag = true);
 
 	void PrintArr();
 
