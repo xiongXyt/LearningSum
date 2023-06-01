@@ -39,9 +39,9 @@ SingleListTable::SingleListTable() {
 }
 
 /***********************************************************************
-* 函 数 名：SingleListTable(int n)
+* 函 数 名：SingleListTable(int count)
 * 形 参 表：
-*			1 ) n -->( int ) : 需要初始化链表的节点个数
+*			1 ) count -->( int ) : 需要初始化链表的节点个数
 * 返 回 值：None
 * 函数功能：
 *			-- 1 -- ：有参构造
@@ -52,38 +52,38 @@ SingleListTable::SingleListTable() {
 *			更改人员：xyt
 *			更改内容：
 *					1 ：初始化链表空头节点，集成到 __InitList() 函数
-*					2 ：尾插法，集成到 AddEndNum(int num) 函数
+*					2 ：尾插法，集成到 AddEndNum(int value) 函数
 ***********************************************************************/
-SingleListTable::SingleListTable(int n) {
+SingleListTable::SingleListTable(int count) {
 	this->__InitList();  // 初始化链表
 
-	for (int i = 0; i < n; i++) {
+	for (int i = 0; i < count; i++) {
 		this->AddEndNum(i + 1);  // 尾插法
 	}
 }
 
 /***********************************************************************
-* 函 数 名：SingleListTable(int n, int num)
+* 函 数 名：SingleListTable(int count, int value)
 * 形 参 表：
-*			1 ) n ---->( int ) : 需要初始化链表的节点个数
-*			2 ) num -->( int ) : 链表每个节点数据域的值
+*			1 ) count ---->( int ) : 需要初始化链表的节点个数
+*			2 ) value ---->( int ) : 链表每个节点数据域的值
 * 返 回 值：None
 * 函数功能：
 *			-- 1 -- ：有参构造
 *			-- 2 -- ：初始化链表空头节点
-*			-- 3 -- ：构造值都为 num 的链表
+*			-- 3 -- ：构造值都为 value 的链表
 * 最后更改：
 *			更改时间：【 2023.5.13 】
 *			更改人员：xyt
 *			更改内容：
 *					1 ：初始化链表空头节点，集成到 __InitList() 函数
-*					2 ：尾插法，集成到 AddEndNum(int num) 函数
+*					2 ：尾插法，集成到 AddEndNum(int value) 函数
 ***********************************************************************/
-SingleListTable::SingleListTable(int n, int num) {
+SingleListTable::SingleListTable(int count, int value) {
 	this->__InitList();  // 初始化链表
 
-	for (int i = 0; i < n; i++) {
-		this->AddEndNum(num);  // 尾插法
+	for (int i = 0; i < count; i++) {
+		this->AddEndNum(value);  // 尾插法
 	}
 }
 
@@ -102,13 +102,13 @@ SingleListTable::SingleListTable(int n, int num) {
 *			更改人员：xyt
 *			更改内容：
 *					1 ：初始化链表空头节点，集成到 __InitList() 函数
-*					2 ：尾插法，集成到 AddEndNum(int num) 函数
+*					2 ：尾插法，集成到 AddEndNum(int value) 函数
 ***********************************************************************/
 SingleListTable::SingleListTable(int* Begin, int* End) {
 	this->__InitList();  // 初始化链表
 
-	for (int* num = Begin; num < End; ++num) {
-		this->AddEndNum(*num);  // 尾插法
+	for (int* temp = Begin; temp < End; ++temp) {
+		this->AddEndNum(*temp);  // 尾插法
 	}
 }
 
@@ -127,7 +127,7 @@ SingleListTable::SingleListTable(int* Begin, int* End) {
 *			更改内容：
 *					1 ：长度从赋值方式改为计数
 *					2 ：初始化链表空头节点，集成到 __InitList() 函数
-*					2 ：尾插法，集成到 AddEndNum(int num) 函数
+*					2 ：尾插法，集成到 AddEndNum(int value) 函数
 ***********************************************************************/
 SingleListTable::SingleListTable(const SingleListTable& other) {
 	this->__InitList();  // 初始化链表
@@ -168,6 +168,7 @@ SingleListTable::~SingleListTable() {
 
 	// 长度置为零
 	this->m_Len = 0;
+	this->m_pHead = nullptr;
 }
 
 /***********************************************************************
@@ -195,7 +196,7 @@ SingleListTable SingleListTable::operator+(const SingleListTable& other) {
 	}
 
 	// 挂载节点到最后一个
-	for (Node* pOther = other.m_pHead->NextNode; pOther != nullptr; pOther=pOther->NextNode) {
+	for (Node* pOther = other.m_pHead->NextNode; pOther != nullptr; pOther = pOther->NextNode) {
 		// 获取新链表的数据
 		Node* pNum = new Node;
 		pNum->number = pOther->number;
@@ -222,7 +223,7 @@ SingleListTable SingleListTable::operator+(const SingleListTable& other) {
 *			更改时间：【 2023.5.13 】
 *			更改人员：xyt
 *			更改内容：
-*					1 ：尾插法，集成到 AddEndNum(int num) 函数
+*					1 ：尾插法，集成到 AddEndNum(int value) 函数
 ***********************************************************************/
 SingleListTable SingleListTable::operator=(const SingleListTable& other) {
 	this->__InitList();  // 初始化链表
@@ -267,9 +268,74 @@ void SingleListTable::PrintList() const {
 }
 
 /***********************************************************************
-* 函 数 名：AddHeadNum(int num)
+* 函 数 名：Clear()
+* 形 参 表：None
+* 返 回 值：None
+* 函数功能：
+*			-- 1 -- ：清空链表，保留头指针
+* 最后更改：
+*			更改时间：【 2023.6.1 】
+*			更改人员：xyt
+*			更改内容：
+*					1 ：创建函数，实现功能
+***********************************************************************/
+void SingleListTable::Clear() {
+	Node* pTemp = nullptr;  // 临时保存节点
+
+// 从前向后遍历释放
+	while (this->m_pHead->NextNode != nullptr) {
+		pTemp = this->m_pHead->NextNode;
+		this->m_pHead->NextNode = this->m_pHead->NextNode->NextNode;
+		delete pTemp;
+		pTemp = nullptr;
+	}
+
+	// 长度置为零
+	this->m_Len = 0;
+	this->m_pHead->number = 0;
+
+	// 保留头指针
+	this->m_pHead->NextNode = nullptr;
+}
+
+/***********************************************************************
+* 函 数 名：IsEmpty()
+* 形 参 表：None
+* 返 回 值：None
+* 函数功能：
+*			-- 1 -- ：判断链表为空
+*			-- 2 -- ：指针为空或者长度为空
+* 最后更改：
+*			更改时间：【 2023.6.1 】
+*			更改人员：xyt
+*			更改内容：
+*					1 ：创建函数，实现功能
+***********************************************************************/
+bool SingleListTable::IsEmpty() {
+	/* 指针为空或者长度为空 */
+	return 0 == this->m_Len || 0 == this->m_pHead->number
+		|| this->m_pHead->NextNode == nullptr;
+}
+/***********************************************************************
+* 函 数 名：MaxSize()
+* 形 参 表：None
+* 返 回 值：None
+* 函数功能：
+*			-- 1 -- ：返回最大容量，本程序默认为200个节点
+* 最后更改：
+*			更改时间：【 2023.6.1 】
+*			更改人员：xyt
+*			更改内容：
+*					1 ：创建函数，实现功能
+***********************************************************************/
+int SingleListTable::MaxSize() {
+	return MAXSIZE;  // 200
+}
+
+/***********************************************************************
+* 函 数 名：AddHeadNum(int value)
 * 形 参 表：
-*			1 ) num -->( int ) : 插入链表的值
+*			1 ) value -->( int ) : 插入链表的值
 * 返 回 值：None
 * 函数功能：
 *			-- 1 -- ：插入新值到链表的头部
@@ -279,10 +345,10 @@ void SingleListTable::PrintList() const {
 *			更改内容：
 *					1 ：就是写了注释
 ***********************************************************************/
-void SingleListTable::AddHeadNum(int num) {
+void SingleListTable::AddHeadNum(int value) {
 	// 新节点
 	Node* pNew = new Node;
-	pNew->number = num;
+	pNew->number = value;
 	pNew->NextNode = nullptr;
 
 	// 头插法
@@ -308,9 +374,9 @@ void SingleListTable::AddHeadNum(int num) {
 }
 
 /***********************************************************************
-* 函 数 名：AddEndNum(int num)
+* 函 数 名：AddEndNum(int value)
 * 形 参 表：
-*			1 ) num -->( int ) : 插入链表的值
+*			1 ) value -->( int ) : 插入链表的值
 * 返 回 值：None
 * 函数功能：
 *			-- 1 -- ：插入新值到链表的尾部
@@ -320,10 +386,10 @@ void SingleListTable::AddHeadNum(int num) {
 *			更改内容：
 *					1 ：就是写了注释
 ***********************************************************************/
-void SingleListTable::AddEndNum(int num) {
+void SingleListTable::AddEndNum(int value) {
 	// 新节点
 	Node* pNew = new Node;
-	pNew->number = num;
+	pNew->number = value;
 	pNew->NextNode = nullptr;
 
 	// 尾插法
@@ -354,21 +420,21 @@ void SingleListTable::AddEndNum(int num) {
 }
 
 /***********************************************************************
-* 函 数 名：AddIndexNum(int index, int num)
+* 函 数 名：AddIndexNum(int pos, int value)
 * 形 参 表：
-*			1 ) index -->( int ) : 插入链表的位置
-*			2 ) num -->( int ) : 插入链表的值
+*			1 ) pos -->( int ) : 插入链表的位置
+*			2 ) value -->( int ) : 插入链表的值
 * 返 回 值：None
 * 函数功能：
-*			-- 1 -- ：插入新值 num 到链表的 index 位置
+*			-- 1 -- ：插入新值 value 到链表的 pos 位置
 * 最后更改：
 *			更改时间：【 2023.5.13 】
 *			更改人员：xyt
 *			更改内容：
 *					1 ：就是写了注释
 ***********************************************************************/
-void SingleListTable::AddIndexNum(int index, int num) {
-	if (index<1 || index>this->m_Len) {  // 索引有误
+void SingleListTable::AddIndexNum(int pos, int value) {
+	if (pos<1 || pos>this->m_Len) {  // 索引有误
 		cout << "----- 索引不合法 -----" << endl << endl;
 	}
 	else {
@@ -376,11 +442,11 @@ void SingleListTable::AddIndexNum(int index, int num) {
 
 		// 需要插入的节点初始化
 		Node* pNum = new Node;
-		pNum->number = num;
+		pNum->number = value;
 		pNum->NextNode = nullptr;
 
 		// 找到需要插入的前一个位置
-		for (int i = 1; i < index; i++) {
+		for (int i = 1; i < pos; i++) {
 			pTemp = pTemp->NextNode;  // 后移
 		}
 
@@ -419,7 +485,7 @@ void SingleListTable::DeleteHeadNum() {
 		cout << "位置 : 1 " << endl;
 
 		// 释放被删除的节点
-		delete pNum;  
+		delete pNum;
 		pNum = nullptr;
 
 		// 长度和头指针的数据域变化
@@ -432,12 +498,12 @@ void SingleListTable::DeleteHeadNum() {
 }
 
 /***********************************************************************
-* 函 数 名：DeleteIndexNum(int index)
+* 函 数 名：DeleteIndexNum(int pos)
 * 形 参 表：
-*			1 ) : index -->( int ) 删除链表的位置
+*			1 ) : pos -->( int ) 删除链表的位置
 * 返 回 值：None
 * 函数功能：
-*			-- 1 -- ：删除链表index位置的节点
+*			-- 1 -- ：删除链表pos位置的节点
 * 最后更改：
 *			更改时间：【 2023.5.13 】
 *			更改人员：xyt
@@ -464,7 +530,7 @@ void SingleListTable::DeleteEndNum() {
 		cout << "位置 : " << this->m_Len << " " << endl;
 
 		// 释放被删除的节点
-		delete pNum;  
+		delete pNum;
 		pNum = nullptr;
 
 		// 长度和头指针的数据域变化
@@ -477,12 +543,12 @@ void SingleListTable::DeleteEndNum() {
 }
 
 /***********************************************************************
-* 函 数 名：DeleteIndexNum(int index)
+* 函 数 名：DeleteIndexNum(int pos)
 * 形 参 表：
-*			1 ) : index -->( int ) 删除链表的位置
+*			1 ) : pos -->( int ) 删除链表的位置
 * 返 回 值：None
 * 函数功能：
-*			-- 1 -- ：删除链表index位置的节点
+*			-- 1 -- ：删除链表pos位置的节点
 * 最后更改：
 *			更改时间：【 2023.5.13 】
 *			更改人员：xyt
@@ -490,9 +556,9 @@ void SingleListTable::DeleteEndNum() {
 *					1 ：写了注释、增加了链表被删除的位置信息
 *					2 ：新增链表长度为零的判断
 ***********************************************************************/
-void SingleListTable::DeleteIndexNum(int index) {
+void SingleListTable::DeleteIndexNum(int pos) {
 	if (0 != this->m_Len) {  // 长度不为零
-		if (index<1 || index>this->m_Len) {  // 索引有误
+		if (pos<1 || pos>this->m_Len) {  // 索引有误
 			cout << "----- 索引不合法 -----" << endl << endl;
 		}
 		else {  // 索引正确
@@ -500,7 +566,7 @@ void SingleListTable::DeleteIndexNum(int index) {
 			Node* pNum = nullptr;         // 保存节点的指针
 
 			// 找到需要删除的前一个位置
-			for (int i = 1; i < index; i++) {
+			for (int i = 1; i < pos; i++) {
 				pTemp = pTemp->NextNode;  // 后移
 			}
 
@@ -510,7 +576,7 @@ void SingleListTable::DeleteIndexNum(int index) {
 
 			// 打印被删除的节点信息
 			cout << "删除 : " << pNum->number << endl;
-			cout << "位置 : " << index << " " << endl;
+			cout << "位置 : " << pos << " " << endl;
 
 			delete pNum;  // 释放被删除的节点
 			pNum = nullptr;
@@ -527,28 +593,28 @@ void SingleListTable::DeleteIndexNum(int index) {
 }
 
 /***********************************************************************
-* 函 数 名：DeleteNum(int num, bool flag)
+* 函 数 名：DeleteNum(int value, bool flag)
 * 形 参 表：
-*			1 ) : num --->( int ) 需删除的值
-*			2 ) : flag -->( int ) 全部删除链表num值的标志
+*			1 ) : value --->( int ) 需删除的值
+*			2 ) : flag -->( int ) 全部删除链表value值的标志
 * 返 回 值：None
 * 函数功能：
-*			-- 1 -- ：删除链表 num 值的第一个节点
-*			-- 2 -- ：flag ( true ) 信息全部删除链表 num 值的节点
+*			-- 1 -- ：删除链表 value 值的第一个节点
+*			-- 2 -- ：flag ( true ) 信息全部删除链表 value 值的节点
 * 最后更改：
 *			更改时间：【 2023.5.13 】
 *			更改人员：xyt
 *			更改内容：
 *					1 ：写了注释、增加了链表被删除的位置信息
 ***********************************************************************/
-void SingleListTable::DeleteNum(int num, bool flag) {  // flag为true,全部删除
+void SingleListTable::DeleteNum(int value, bool flag) {  // flag为true,全部删除
 	Node* pTemp = this->m_pHead;  // 临时指针
 	Node* pNum = nullptr;         // 保存节点的指针
 
 	int posindex = 1;  // 被删除节点位置
 
 	while (pTemp->NextNode != nullptr) {  // 链表不为空
-		if (pTemp->NextNode->number == num) {
+		if (pTemp->NextNode->number == value) {
 			/*********************
 			* 删除目标节点，并释放
 			* 注意删除之后是不用移动的
@@ -580,6 +646,130 @@ void SingleListTable::DeleteNum(int num, bool flag) {  // flag为true,全部删除
 			++posindex;
 		}
 	}
+}
+
+/***********************************************************************
+* 函 数 名：Front()
+* 形 参 表：None
+* 返 回 值：None
+* 函数功能：
+*			-- 1 -- ：返回首元素的引用
+* 最后更改：
+*			更改时间：【 2023.6.1 】
+*			更改人员：xyt
+*			更改内容：
+*					1 ：创建函数，实现功能
+***********************************************************************/
+int& SingleListTable::Front() {
+	if (this->m_pHead->NextNode != nullptr) {  // 不为空返回第一个元素
+		return this->m_pHead->NextNode->number;
+	}
+	else {
+		return this->m_pHead->number;  // 为空返回头指针的元素
+	}
+}
+
+/***********************************************************************
+* 函 数 名：Assign(int count, int value)
+* 形 参 表：
+*			1 ) count ---->( int ) : 新链表的节点个数
+*			2 ) value ---->( int ) : 链表每个节点数据域的值
+* 返 回 值：None
+* 函数功能：
+*			-- 1 -- ：大小为 count 新值都为 value 的链表
+*			-- 2 -- ：以 count 份 value 的副本替换内容。
+* 最后更改：
+*			更改时间：【 2023.6.1 】
+*			更改人员：xyt
+*			更改内容：
+*					1 ：创建函数，实现功能
+***********************************************************************/
+void SingleListTable::Assign(int count, int value) {
+	// 第一个元素为空，或者长度不为零，就清空一次
+	if (!this->IsEmpty()) {
+		this->Clear();
+	}
+	for (int i = 0; i < count; i++) {
+		this->AddEndNum(value);  // 尾插法
+	}
+}
+
+/***********************************************************************
+* 函 数 名：Swap(SingleListTable& other)
+* 形 参 表：
+*			1 ) other -->( SingleListTable& ) : 另外一个链表类
+* 返 回 值：None
+* 函数功能：
+*			-- 1 -- ：将内容与 other 的交换
+* 最后更改：
+*			更改时间：【 2023.5.13 】
+*			更改人员：xyt
+*			更改内容：
+*					1 ：创建函数，实现功能
+***********************************************************************/
+void SingleListTable::Swap(SingleListTable& other) {
+	SingleListTable temp;
+	temp.Clear();
+	temp = *this;
+	this->Clear();
+	*this = other;
+	other.Clear();
+	other = temp;
+}
+
+/***********************************************************************
+* 函 数 名：Merge(const SingleListTable& other)
+* 形 参 表：
+*			1 ) other -->( const SingleListTable& ) : 另外一个常链表类
+* 返 回 值：None
+* 函数功能：
+*			-- 1 -- ：归并二个已排序链表
+*			-- 2 -- ：链表应以升序排序
+* 最后更改：
+*			更改时间：【 2023.6.1 】
+*			更改人员：xyt
+*			更改内容：
+*					1 ：创建函数，实现功能
+*					2 ：改为尾插法
+***********************************************************************/
+void SingleListTable::Merge(const SingleListTable& other) {
+	SingleListTable newList;  // 零时链表
+	newList.Clear();
+
+	Node* myTemp = this->m_pHead;
+	Node* otherTemp = other.m_pHead;
+
+	bool flag = true;
+	while (flag) {
+		if (nullptr == myTemp->NextNode) {  // 直接连接other的剩余
+			while (nullptr != otherTemp->NextNode) {
+				newList.AddEndNum(otherTemp->NextNode->number);  // 使用尾插法
+				otherTemp = otherTemp->NextNode;
+			}
+			flag = false;
+		}
+		else if (nullptr == otherTemp->NextNode) {  // 直接连接mytemp的剩余
+			while (nullptr != myTemp->NextNode) {
+				newList.AddEndNum(myTemp->NextNode->number);  // 使用尾插法
+				myTemp = myTemp->NextNode;
+			}
+			flag = false;
+		}
+		else {
+			if (myTemp->NextNode->number < otherTemp->NextNode->number) {
+				newList.AddEndNum(myTemp->NextNode->number);  // 使用尾插法
+				myTemp = myTemp->NextNode;
+			}
+			else {
+				newList.AddEndNum(otherTemp->NextNode->number);  // 使用尾插法
+				otherTemp = otherTemp->NextNode;
+			}
+		}
+	}
+
+	this->Clear();  // 先清除一下，不知道有没有用哈哈哈
+	*this = newList;  // ( = ) 的重载好像有点问题
+
 }
 
 /***********************************************************************

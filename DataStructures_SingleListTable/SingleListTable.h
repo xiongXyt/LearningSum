@@ -14,10 +14,10 @@
 *
 *		修改时间：【 2023-05-11 下午 】
 *		修改内容：【 完成所有的预定功能 】
-* 
-*		修改时间：【 2023-05-13 】
-*		修改内容：【  】
-* 
+*
+*		修改时间：【 2023-06-1 】
+*		修改内容：【 添加C++参考手册单链表的函数 】
+*
 *	作    者：【 xyt 】
 *	联系方式：3124725835@qq.com
 *
@@ -27,6 +27,8 @@
 
 #include<iostream>
 using namespace std;
+
+#define MAXSIZE 200
 
 /***************************************************
 * 节点结构体，节点能指向下一个节点
@@ -40,7 +42,7 @@ struct Node {
 
 /***************************************************
 *	说明：使用空的头节点，里面的数据域用来保存链表的长度
-* 
+*
 *	草    稿    [ SingleListTable ]
 *
 *	类的功能：自己写的单链表数组
@@ -53,9 +55,10 @@ struct Node {
 *		项目启动，类的数据成员定义、构造析构（还没有做测试）
 *		创建、遍历、插入、删除、排序
 *		运算符重载，（ + = ）
+*		遍历、项目代码简化、注释、做好所有的测试案例、
 *
 *	本次任务：
-*		遍历、项目代码简化、注释、做好所有的测试案例、
+*		实现C++参考手册单链表的函数
 *
 ***************************************************/
 class SingleListTable {
@@ -67,8 +70,8 @@ private:
 
 public:
 	SingleListTable();
-	SingleListTable(int n);
-	SingleListTable(int n, int num);
+	SingleListTable(int count);
+	SingleListTable(int count, int value);
 	SingleListTable(int* Begin, int* End);
 	SingleListTable(const SingleListTable& other);
 	~SingleListTable();
@@ -78,15 +81,24 @@ public:
 	SingleListTable operator=(const SingleListTable& other);  // 等于运算符重载
 
 	void PrintList()const;     // 打印链表
+	void Clear();  // 清空链表，保留头指针
+	bool IsEmpty();  // 判断链表为空
+	int MaxSize();  // 返回最大容量，本程序默认为200个节点
 
-	void AddHeadNum(int num);  // 头插入
-	void AddEndNum(int num);  // 尾插入
-	void AddIndexNum(int index, int num);  // 按照指定位置插入
+	void AddHeadNum(int value);  // 头插入
+	void AddEndNum(int value);  // 尾插入
+	void AddIndexNum(int pos, int value);  // 按照指定位置插入
 
 	void DeleteHeadNum();  // 头删除
 	void DeleteEndNum();  // 尾删除
-	void DeleteIndexNum(int index);  // 按照指定位置删除
-	void DeleteNum(int num, bool flag = false);     // 删除含有 num 数据的第一个节点
+	void DeleteIndexNum(int pos);  // 按照指定位置删除
+	void DeleteNum(int value, bool flag = false);     // 删除含有 value 数据的第一个节点
+
+	int& Front();  // 返回首元素的引用
+	void Assign(int count, int value);  // 以 count 份 value 的副本替换内容。
+
+	void Swap(SingleListTable& other); // 将内容与 other 的交换
+	void Merge(const SingleListTable& other);  //归并二个已排序链表,链表应以升序排序。
 
 	void Sort();           // 排序
 
